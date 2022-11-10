@@ -7,6 +7,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+// Checks whether a given GoogleClaims can be used to log in.
 func CheckLoginInfo(ctx context.Context, claims GoogleClaims) (string, error) {
 
 	db := GetDBFromContext(ctx)

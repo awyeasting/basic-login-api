@@ -7,6 +7,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+// Gets the currently logged in user
 func GetSessionUser(r *http.Request) (string, error) {
 	authSession, err := cookieStore.Get(r, "authSession")
 	userID, ok := authSession.Values["userID"]

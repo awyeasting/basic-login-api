@@ -2,6 +2,9 @@ package auth
 
 import "strings"
 
+// Removes most indentifying information from an email
+// in order to hint at what the email is to real users
+// and to hide it from malicious users.
 func AnonymizeEmail(email string) string {
 	if len(email) < 5 {
 		return email

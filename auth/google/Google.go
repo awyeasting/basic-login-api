@@ -11,6 +11,7 @@ import (
 	"github.com/dgrijalva/jwt-go"
 )
 
+// Retrieves login claims a given google login JWT
 func ValidateGoogleJWT(tokenString string) (GoogleClaims, error) {
 	claimsStruct := GoogleClaims{}
 

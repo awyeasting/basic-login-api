@@ -9,6 +9,8 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+// Changes user info given a userID string
+// and a pointer to a struct containing the new info
 func ChangeUserInfo(ctx context.Context, userID string, newUserInfo *UserInfo) error {
 	if newUserInfo == nil {
 		return nil

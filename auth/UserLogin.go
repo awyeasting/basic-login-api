@@ -7,6 +7,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+// Queries database to check if the loginInfo can be used to log in
 func CheckLoginInfo(ctx context.Context, loginInfo *LoginInfo) (string, error) {
 
 	db := GetDBFromContext(ctx)
@@ -38,6 +39,7 @@ func CheckLoginInfo(ctx context.Context, loginInfo *LoginInfo) (string, error) {
 	return id, err
 }
 
+// Queries database to get user info
 func GetUserInfo(ctx context.Context, userID string) (*UserInfo, error) {
 	db := GetDBFromContext(ctx)
 
@@ -55,6 +57,8 @@ func GetUserInfo(ctx context.Context, userID string) (*UserInfo, error) {
 	return &uInfo, err
 }
 
+// Ensures a user has an active confirmation,
+// then sends confirmation email
 func EnsureVerification(ctx context.Context, userID string) error {
 	db := GetDBFromContext(ctx)
 

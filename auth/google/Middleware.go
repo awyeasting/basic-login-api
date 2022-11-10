@@ -9,6 +9,9 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+// Decodes the body of a request as GoogleJWT.
+// Then retrieves claims from the JWT.
+// Puts the result in 'googleClaims' if the input is valid.
 func DecodeGoogleClaims(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		var gJWT GoogleJWT

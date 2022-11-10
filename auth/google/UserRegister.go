@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+// Creates a new user for a given google claims.
 func InsertNewUser(ctx context.Context, claims GoogleClaims) error {
 	if claims.Email == "" {
 		return errors.New("Empty claims received in InsertNewUser for google registration")

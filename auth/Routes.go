@@ -9,6 +9,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+// Handles user login requests and processes errors into status codes
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	loginInfo := r.Context().Value("loginInfo").(LoginInfo)
 
@@ -36,6 +37,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	CreateLoginSession(w, r, userID)
 }
 
+// Handles user logout requests
 func LogoutHandler(w http.ResponseWriter, r *http.Request) {
 
 	authSession, _ := cookieStore.Get(r, "authSession")
@@ -45,6 +47,7 @@ func LogoutHandler(w http.ResponseWriter, r *http.Request) {
 	authSession.Save(r, w)
 }
 
+// Handles user register requests and processes errors into status codes
 func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 	newUser := r.Context().Value("newUser").(NewUser)
 
@@ -65,6 +68,7 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// Handles user information requests and processes errors into status codes
 func UserHandler(w http.ResponseWriter, r *http.Request) {
 	userID := r.Context().Value("userID").(string)
 
@@ -82,6 +86,7 @@ func UserHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(uInfo)
 }
 
+// Handles user information change requests and processes errors into status codes
 func UserInfoChangeHandler(w http.ResponseWriter, r *http.Request) {
 	userID := r.Context().Value("userID").(string)
 	userInfo := r.Context().Value("userInfo").(UserInfo)
@@ -101,6 +106,7 @@ func UserInfoChangeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// Handles email confirmation requests and processes errors into status codes
 func UserConfirmationHandler(w http.ResponseWriter, r *http.Request) {
 	confirmID := r.Context().Value("confirmationID").(string)
 

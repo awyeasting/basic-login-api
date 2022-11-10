@@ -12,6 +12,7 @@ var (
 	GOOGLE_CLIENT_ID     string = ""
 )
 
+// Create router for Google authentication paths
 func GoogleRouter(loginSessionCreator func(http.ResponseWriter, *http.Request, string)) http.Handler {
 
 	CREATE_LOGIN_SESSION = loginSessionCreator

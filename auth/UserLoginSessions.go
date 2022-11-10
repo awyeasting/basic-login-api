@@ -6,6 +6,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+// Creates a login session for a given user
 func CreateLoginSession(w http.ResponseWriter, r *http.Request, userID string) {
 	// Create session and send back cookie
 	log.Info("Creatings session for user ", userID)

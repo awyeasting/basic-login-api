@@ -10,6 +10,8 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+// Decodes the body of a request as NewUser.
+// Puts the result in 'newUser' if the input is valid.
 func DecodeNewUserInfo(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		var user NewUser
@@ -50,6 +52,8 @@ func DecodeNewUserInfo(next http.Handler) http.Handler {
 	})
 }
 
+// Decodes the body of a request as UserInfo.
+// Puts the result in 'userInfo' if the input is valid.
 func DecodeUserInfo(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		var user UserInfo
@@ -98,6 +102,8 @@ func DecodeUserInfo(next http.Handler) http.Handler {
 	})
 }
 
+// Decodes the body of a request as LoginInfo.
+// Puts the result in 'loginInfo' if the input is valid.
 func DecodeLoginInfo(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		var info LoginInfo
@@ -114,6 +120,8 @@ func DecodeLoginInfo(next http.Handler) http.Handler {
 	})
 }
 
+// Checks that the user has an active session and they do,
+// puts their userID in the request context.
 func RequireValidUser(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		userID, err := GetSessionUser(r)
@@ -128,6 +136,7 @@ func RequireValidUser(next http.Handler) http.Handler {
 	})
 }
 
+// Decodes the confirmationID from the URL parameter
 func DecodeUserConfirmation(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		confirmationID := chi.URLParam(r, "confirmationID")

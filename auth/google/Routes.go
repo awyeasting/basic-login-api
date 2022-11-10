@@ -7,6 +7,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+// Handles internal login checks after google claims clears for a given user.
 func GoogleLoginHandler(w http.ResponseWriter, r *http.Request) {
 	claims := r.Context().Value("googleClaims").(GoogleClaims)
 
@@ -21,6 +22,7 @@ func GoogleLoginHandler(w http.ResponseWriter, r *http.Request) {
 	CREATE_LOGIN_SESSION(w, r, userID)
 }
 
+// Handles internal registration after google claims clears for a given user.
 func GoogleRegisterHandler(w http.ResponseWriter, r *http.Request) {
 	claims := r.Context().Value("googleClaims").(GoogleClaims)
 

@@ -9,6 +9,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+// Inserts new user into database
 func InsertNewUser(ctx context.Context, newUser *NewUser) error {
 
 	db := GetDBFromContext(ctx)
@@ -68,6 +69,7 @@ func InsertNewUser(ctx context.Context, newUser *NewUser) error {
 	return err
 }
 
+// Send an email confirmation email to a given user
 func SendRegistrationEmail(destEmail, userID, emailID string) error {
 
 	subject := fmt.Sprintf("Confirm Email for %v", TITLE)

@@ -1,5 +1,6 @@
 package auth
 
+// Authentication configuration
 const (
 	CURRENT_HASH_METHOD = "bcrypt"
 	CURRENT_HASH_COST   = 14

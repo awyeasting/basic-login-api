@@ -8,11 +8,15 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+// Generalizes sql database actions to both databases and transactions
 type dbHandle interface {
 	QueryRow(string, ...any) *sql.Row
 	Exec(string, ...any) (sql.Result, error)
 }
 
+// Marks the user associated with a given confirmation id as
+// emailConfirmed in the database if the confirmation is valid.
+// Either way deletes the confirmation from the database.
 func ConfirmEmail(ctx context.Context, confirmID string) error {
 	db := GetDBFromContext(ctx)
 
@@ -70,6 +74,9 @@ func ConfirmEmail(ctx context.Context, confirmID string) error {
 	return err
 }
 
+// Creates a new email confirmation for a given user.
+// Returns a callback to send the email confirmation to the user
+// if the confirmation was successful.
 func CreateEmailConfirmation(db dbHandle, userID string) (func(), error) {
 	// Create email confirmation code
 	getConfirmationInfoQuery := `
@@ -97,6 +104,11 @@ func CreateEmailConfirmation(db dbHandle, userID string) (func(), error) {
 	}, err
 }
 
+// Creates a new email confirmation for a given user.
+// Checks before creation if a confirmation has already been made for the user.
+// If there's a preexisting expired confirmation, overwrite it with the new one.
+// Returns a callback to send the email confirmation to the user
+// if the confirmation was successful.
 func CreateSafeEmailConfirmation(db dbHandle, userID string) (func(), error) {
 	// Create email confirmation code
 	getConfirmationInfoQuery := `

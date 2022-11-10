@@ -22,6 +22,7 @@ var (
 	FRONTEND_URL     = "http://localhost:3000"
 )
 
+// Create router for authentication paths
 func AuthRouter() http.Handler {
 
 	SESSION_SECRET = os.Getenv("SESSION_SECRET")
